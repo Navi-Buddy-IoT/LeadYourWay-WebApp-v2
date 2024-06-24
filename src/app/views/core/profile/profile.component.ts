@@ -14,6 +14,7 @@ import { AuthService } from '../../../services/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Bicycle } from '../../../models/bicycle.model';
 import { FormsModule } from '@angular/forms';
+import { RentService } from '../../../services/rent.service';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class ProfileComponent {
   userService = inject(UserService);
+  rentService = inject(RentService);
   authService = inject(AuthService);
   cookieService = inject(CookieService);
   router = inject(Router);
@@ -61,7 +63,9 @@ export class ProfileComponent {
     this.userService.getItem(userId).subscribe((response: any) => {
       this.user = response;
     });
-    // todo get rented bicycles
+    this.rentService.getRentedBicycles(userId).subscribe((response: any) => {
+      this.rentedBicycles = response;
+    });
   }
 
   ngOnInit(): void {
