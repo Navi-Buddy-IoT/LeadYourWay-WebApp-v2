@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../../components/shared/header/header.component';
 import { Bicycle } from '../../../models/bicycle.model';
 import { BicycleService } from '../../../services/bicycle.service';
@@ -6,15 +6,25 @@ import { Router } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
+import { GoogleMapComponent } from '../../../components/bicycle/google-map/google-map.component';
+import { TemperatureComponent } from '../../../components/bicycle/temperature/temperature.component';
+import { VelocityComponent } from '../../../components/bicycle/velocity/velocity.component';
+import { Subscription, interval } from 'rxjs';
 
 @Component({
   selector: 'app-bicycle',
   standalone: true,
-  imports: [HeaderComponent, CommonModule],
+  imports: [
+    HeaderComponent,
+    CommonModule,
+    GoogleMapComponent,
+    TemperatureComponent,
+    VelocityComponent,
+  ],
   templateUrl: './bicycle.component.html',
   styleUrl: './bicycle.component.scss',
 })
-export class BicycleComponent {
+export class BicycleComponent implements OnInit, OnDestroy {
   bicycleId: number | undefined;
   bicycle: Bicycle | undefined;
 
@@ -24,6 +34,12 @@ export class BicycleComponent {
   fromDate: string | null;
   totalDays: number | undefined;
   totalCost = 0;
+
+  private dataSubscription: Subscription | undefined;
+  private countdownSubscription: Subscription | undefined;
+  private pollingInterval = 5000;
+  private countdownInterval = 1000;
+  countdown = this.pollingInterval / 1000;
 
   constructor(
     private bicycleService: BicycleService,
@@ -40,6 +56,36 @@ export class BicycleComponent {
   ngOnInit(): void {
     this.userId = this.cookieService.get('JUID') || '';
     this.getBicycle();
+    this.dataSubscription = interval(this.pollingInterval).subscribe(() => {
+      this.fetchData();
+      this.resetCountdown();
+    });
+    this.startCountdown();
+  }
+
+  fetchData(): void {
+    if (!this.bicycle) {
+      return;
+    }
+    this.bicycleService.getItem(this.bicycle.id).subscribe((bicycle) => {
+      this.bicycle = bicycle;
+    });
+  }
+
+  startCountdown(): void {
+    this.countdownSubscription = interval(this.countdownInterval).subscribe(
+      () => {
+        if (this.countdown > 0) {
+          this.countdown--;
+        } else {
+          this.resetCountdown();
+        }
+      }
+    );
+  }
+
+  resetCountdown(): void {
+    this.countdown = this.pollingInterval / 1000;
   }
 
   getBicycle(): void {
@@ -97,5 +143,14 @@ export class BicycleComponent {
         this.router.navigate(['/profile']);
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
+    }
+    if (this.countdownSubscription) {
+      this.countdownSubscription.unsubscribe();
+    }
   }
 }

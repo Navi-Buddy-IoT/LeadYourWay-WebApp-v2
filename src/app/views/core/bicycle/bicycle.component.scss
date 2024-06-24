@@ -63,3 +63,16 @@ img {
 .containerBox {
   width: 50%;
 }
+
+.center-map {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.center-iot {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}

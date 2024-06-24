@@ -7,6 +7,7 @@ export interface Bicycle {
   bicycleModel: string;
   imageData: string;
   temperature: number;
+  velocity: number;
 }
 
 export interface BicycleSave {

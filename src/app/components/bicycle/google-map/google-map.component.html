@@ -1,0 +1,13 @@
+<google-map id="map" [options]="options">
+  @if(isRented){
+
+  <map-advanced-marker
+    #markerElem="mapAdvancedMarker"
+    [position]="{ lat: -12, lng: -77 }"
+    [content]="markerContent"
+  />
+  } @else {
+
+  <map-circle [center]="circleCenter" [radius]="radius" />
+  }
+</google-map>

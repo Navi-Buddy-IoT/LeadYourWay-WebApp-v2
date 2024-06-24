@@ -113,6 +113,7 @@ export class CreateComponent {
       bicycleModel: this.secondFormGroup.get('model')?.value,
       imageData: this.thirdFormGroup.get('image')?.value,
       temperature: 0,
+      velocity: 0,
     };
 
     this.bicycleService

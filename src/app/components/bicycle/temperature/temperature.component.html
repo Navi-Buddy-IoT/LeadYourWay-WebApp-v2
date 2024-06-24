@@ -1,0 +1,20 @@
+<div class="card p-3">
+  <div class="header center">
+    The temperature outside is around <strong>{{ bicycle.temperature }}</strong>
+  </div>
+  <hr />
+  <div class="content">
+    @if(bicycle.temperature < 20){
+    <p>It's pretty chilly outside, you might want to put on a jacket.</p>
+    <img src="/assets/gif/cold.gif" alt="cold gif" />
+    } @else if (bicycle.temperature >= 20 && bicycle.temperature < 30){
+    <p>
+      The weather is ideal for a bike ride, enjoy the fresh air and the sun.
+    </p>
+    <img src="/assets/gif/ideal.gif" alt="ideale gif" />
+    } @else {
+    <p>It's pretty hot outside, make sure to stay hydrated.</p>
+    <img src="/assets/gif/hot.gif" alt="hot gif" />
+    }
+  </div>
+</div>
