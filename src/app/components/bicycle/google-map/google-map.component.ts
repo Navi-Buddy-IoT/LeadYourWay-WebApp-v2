@@ -25,15 +25,6 @@ export class GoogleMapComponent {
   radius = 1500;
   markerContent: Element | null = null;
 
-  constructor() {
-    // todo: uncomment when the bicycle is passed as input
-    //   this.options = {
-    //     mapId: 'DEMO_MAP_ID',
-    //     center: { lat: this.bicycle.latitude, lng: this.bicycle.longitude },
-    //     zoom: 15,
-    //   };
-  }
-
   ngOnInit() {
     const parser = new DOMParser();
     const svg = parser.parseFromString(
@@ -41,5 +32,13 @@ export class GoogleMapComponent {
       'image/svg+xml'
     ).documentElement;
     this.markerContent = svg;
+    this.options.center = {
+      lat: this.bicycle.latitude,
+      lng: this.bicycle.longitude,
+    };
+    this.circleCenter = {
+      lat: this.bicycle.latitude,
+      lng: this.bicycle.longitude,
+    };
   }
 }

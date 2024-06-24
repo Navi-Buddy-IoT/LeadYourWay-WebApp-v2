@@ -8,6 +8,8 @@ export interface Bicycle {
   imageData: string;
   temperature: number;
   velocity: number;
+  latitude: number;
+  longitude: number;
 }
 
 export interface BicycleSave {

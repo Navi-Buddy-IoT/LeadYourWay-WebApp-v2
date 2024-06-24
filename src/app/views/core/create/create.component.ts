@@ -114,6 +114,8 @@ export class CreateComponent {
       imageData: this.thirdFormGroup.get('image')?.value,
       temperature: 0,
       velocity: 0,
+      latitude: -12,
+      longitude: -77,
     };
 
     this.bicycleService
