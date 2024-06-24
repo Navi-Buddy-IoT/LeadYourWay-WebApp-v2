@@ -3,6 +3,7 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   signOut,
 } from '@angular/fire/auth';
 import { CookieService } from 'ngx-cookie-service';
@@ -37,5 +38,10 @@ export class AuthService {
     this.cookieService.delete('JSESSIONID', '/');
     this.cookieService.delete('JUID', '/');
     return signOut(this.firebaseAuth);
+  }
+
+  forgotPassword(email: string): Observable<any> {
+    const promise = sendPasswordResetEmail(this.firebaseAuth, email);
+    return from(promise);
   }
 }

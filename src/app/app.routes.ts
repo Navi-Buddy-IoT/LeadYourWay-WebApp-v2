@@ -10,11 +10,13 @@ import { BicycleComponent } from './views/core/bicycle/bicycle.component';
 import { ProfileEditComponent } from './views/core/profile-edit/profile-edit.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { authGuard } from './pipelines/auth.guard';
+import { ForgotPasswordComponent } from './views/authorization/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'home', canActivate: [authGuard], component: HomeComponent },
   { path: 'profile', canActivate: [authGuard], component: ProfileComponent },
   {
