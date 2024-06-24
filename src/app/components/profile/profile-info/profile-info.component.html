@@ -1,0 +1,18 @@
+<div class="card-body text-center">
+  <img
+    [src]="user.photoUrl"
+    alt="Generic placeholder image"
+    class="rounded-circle img-fluid"
+    style="width: 150px"
+  />
+  <h5 class="my-3">{{ user.name }}</h5>
+  <div class="d-flex justify-content-center mb-2">
+    <button
+      type="button"
+      class="btn btn-outline-primary ms-1 btn-primary"
+      [routerLink]="['/profile/edit']"
+    >
+      Edit Information
+    </button>
+  </div>
+</div>

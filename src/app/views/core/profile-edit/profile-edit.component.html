@@ -1,1 +1,53 @@
-<p>profile-edit works!</p>
+<body style="background-color: #fee8e7">
+  <div class="my-auto">
+    <form #UserInfoForm="ngForm">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title class="h2">Edit Profile</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-content">
+          <div class="form-group">
+            <label for="nombre" style="margin-bottom: 1%">Name</label>
+            <input
+              class="form-control"
+              type="text"
+              matInput
+              #message
+              maxlength="60"
+              placeholder="Primer nombre"
+              name="fullname"
+              [(ngModel)]="UserData.name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="userImage" style="margin-bottom: 1%; margin-top: 2%"
+              >Profile Image Url</label
+            >
+            <input
+              class="form-control"
+              type="text"
+              matInput
+              placeholder="Image Link"
+              name="userImage"
+              [(ngModel)]="UserData.photoUrl"
+            />
+            <div class="img-container">
+              <img [src]="UserData.photoUrl" alt="Profile Image" />
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button color="primary" (click)="updateOffer()">
+            Update</button
+          >&nbsp;
+          <button mat-button color="warn" routerLink="/profile">Cancel</button
+          >&nbsp;
+        </mat-card-actions>
+        <a mat-stroked-button color="primary" routerLink="/profile">
+          Back to Profile<mat-icon>home</mat-icon>
+        </a>
+      </mat-card>
+    </form>
+  </div>
+</body>

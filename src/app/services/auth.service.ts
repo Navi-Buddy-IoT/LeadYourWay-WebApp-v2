@@ -1,41 +1,41 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  signInWithCustomToken,
 } from '@angular/fire/auth';
 import { CookieService } from 'ngx-cookie-service';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private auth: Auth, private cookieService: CookieService) {}
+  firebaseAuth = inject(Auth);
+  cookieService = inject(CookieService);
 
-  register({ email, password }: any) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  register(email: string, password: string): Observable<any> {
+    const promise = createUserWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
+    );
+    return from(promise);
   }
 
-  login(credentials: any) {
-    return signInWithEmailAndPassword(
-      this.auth,
-      credentials.email,
-      credentials.password
+  login(email: string, password: string): Observable<any> {
+    const promise = signInWithEmailAndPassword(
+      this.firebaseAuth,
+      email,
+      password
     );
+    return from(promise);
   }
 
   logout() {
     this.cookieService.delete('JSESSIONID', '/');
     this.cookieService.delete('JUID', '/');
-    return signOut(this.auth);
-  }
-
-  refreshToken() {
-    return signInWithCustomToken(
-      this.auth,
-      this.cookieService.get('JSESSIONID') || ''
-    );
+    return signOut(this.firebaseAuth);
   }
 }

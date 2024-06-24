@@ -3,7 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Auth2Service } from '../../../services/auth-v2.service';
+import { AuthService } from '../../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { SaveUser } from '../../../models/user.model';
 
@@ -18,7 +18,7 @@ export class SignupComponent {
   fb = inject(FormBuilder);
   htpp = inject(HttpClient);
   router = inject(Router);
-  authService = inject(Auth2Service);
+  authService = inject(AuthService);
   userService = inject(UserService);
   cookieService = inject(CookieService);
 

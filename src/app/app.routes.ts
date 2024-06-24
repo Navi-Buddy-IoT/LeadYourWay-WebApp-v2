@@ -12,28 +12,27 @@ import { PageNotFoundComponent } from './views/page-not-found/page-not-found.com
 import { authGuard } from './pipelines/auth.guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'signup', pathMatch: 'full' },
-  { path: 'signup', component: SignupComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   { path: 'home', canActivate: [authGuard], component: HomeComponent },
-  // { path: 'home', component: HomeComponent },
-  // { path: 'profile', canActivate: [authGuard], component: ProfileComponent },
-  // {
-  //   path: 'profile/edit',
-  //   canActivate: [authGuard],
-  //   component: ProfileEditComponent,
-  // },
-  // {
-  //   path: 'reservation',
-  //   canActivate: [authGuard],
-  //   component: ReservationComponent,
-  // },
-  // { path: 'create-bike', canActivate: [authGuard], component: CreateComponent },
-  // {
-  //   path: 'payment-method',
-  //   canActivate: [authGuard],
-  //   component: PaymentComponent,
-  // },
-  // { path: 'bicycles', canActivate: [authGuard], component: BicycleComponent },
+  { path: 'profile', canActivate: [authGuard], component: ProfileComponent },
+  {
+    path: 'profile/edit',
+    canActivate: [authGuard],
+    component: ProfileEditComponent,
+  },
+  {
+    path: 'reservation',
+    canActivate: [authGuard],
+    component: ReservationComponent,
+  },
+  { path: 'create', canActivate: [authGuard], component: CreateComponent },
+  {
+    path: 'payment-method',
+    canActivate: [authGuard],
+    component: PaymentComponent,
+  },
+  { path: 'bicycles', canActivate: [authGuard], component: BicycleComponent },
   { path: '**', component: PageNotFoundComponent },
 ];

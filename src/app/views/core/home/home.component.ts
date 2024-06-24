@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule, JsonPipe } from '@angular/common';
 import { BicycleService } from '../../../services/bicycle.service';
 import { HeaderComponent } from '../../../components/shared/header/header.component';
+import { CardBicycleComponent } from '../../../components/bicycle/card-bicycle/card-bicycle.component';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ import { HeaderComponent } from '../../../components/shared/header/header.compon
     CommonModule,
     MatPaginatorModule,
     HeaderComponent,
+    CardBicycleComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

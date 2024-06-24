@@ -3,15 +3,17 @@ import {
   HttpErrorResponse,
   HttpHeaders,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, retry, throwError } from 'rxjs';
 import { SaveUser, User } from '../models/user.model';
 import { environment } from '../env/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  cookieService = inject(CookieService);
   base_Url = environment.baseUrl + 'users';
 
   httpOptions = this.getHttpOptions();
@@ -19,7 +21,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   private getHttpOptions(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token');
+    const token = this.cookieService.get('JSESSIONID');
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${token}`,
@@ -45,10 +47,10 @@ export class UserService {
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  updateItem(Id: string, item: any): Observable<User> {
+  updateItem(item: SaveUser): Observable<User> {
     const httpOptions = this.getHttpOptions();
     return this.http
-      .put<User>(`${this.base_Url}/${Id}`, JSON.stringify(item), httpOptions)
+      .patch<User>(`${this.base_Url}`, item, httpOptions)
       .pipe(retry(2), catchError(this.handleError));
   }
 

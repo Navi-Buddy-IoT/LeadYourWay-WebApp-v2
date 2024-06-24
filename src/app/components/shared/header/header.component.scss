@@ -3,6 +3,11 @@
   color: #d78477;
   font-weight: 500;
 }
+.btn-outline {
+  border-color: #d78477;
+  color: #d78477;
+  font-weight: 500;
+}
 
 .btn-outline-primary:hover {
   border-color: #d78477;
@@ -15,7 +20,15 @@ nav.navbar {
 }
 .navbar-brand {
   margin-left: 2%;
+  padding: 0 7px;
+  display: flex;
+  align-items: center;
 }
+.navbar-brand:hover {
+  border: 1px solid #d78477;
+  border-radius: 5px;
+}
+
 .btn-end {
   margin-left: auto;
 }

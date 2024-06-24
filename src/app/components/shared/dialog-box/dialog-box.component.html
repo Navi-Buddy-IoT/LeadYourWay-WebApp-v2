@@ -1,1 +1,16 @@
-<p>dialog-box works!</p>
+<h2
+  mat-dialog-title
+  style="display: block; margin: 20px auto; text-align: center"
+>
+  {{ dialogTitle }}
+</h2>
+<p style="display: block; margin: 20px; text-align: center">
+  {{ dialogMessage }}
+</p>
+<button
+  class="btn btn-primary"
+  style="display: block; margin: 20px auto; text-align: center"
+  (click)="closeDialog()"
+>
+  Close
+</button>

@@ -1,1 +1,162 @@
-<p>create works!</p>
+<app-header />
+
+<div class="page">
+  <div class="formGroup">
+    <mat-stepper [linear]="false" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Bicycle Description</ng-template>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Bicycle Title"
+                formControlName="title"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Bicycle Model"
+                formControlName="model"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <textarea
+                matInput
+                placeholder="Bicycle Description"
+                formControlName="description"
+                required
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <input
+                matInput
+                type="number"
+                placeholder="Bicycle Price"
+                formControlName="price"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <mat-select formControlName="size" placeholder="Bicycle Size">
+                <mat-option value="small">Small (S)</mat-option>
+                <mat-option value="medium">Medium (M)</mat-option>
+                <mat-option value="large">Large (L)</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Bicycle Location</ng-template>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Bicycle Address"
+                formControlName="address"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Bicycle City"
+                formControlName="city"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div class="flex h70">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Bicycle State"
+                formControlName="state"
+                required
+              />
+            </mat-form-field>
+          </div>
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="firstFormGroup">
+        <ng-template matStepLabel>Bicycle Image</ng-template>
+        <form [formGroup]="thirdFormGroup">
+          <div class="form-group mb-4">
+            <label for="userImage" style="margin-bottom: 1%; margin-top: 2%"
+              >Bicycle Image URL</label
+            >
+            <input
+              formControlName="image"
+              class="form-control"
+              type="text"
+              matInput
+              placeholder="Image Link"
+              name="userImage"
+            />
+          </div>
+
+          @if(thirdFormGroup.value.image){
+          <div class="form-group mb-4 img-container">
+            <img src="{{ thirdFormGroup.value.image }}" alt="" />
+          </div>
+          }
+
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+
+      <mat-step>
+        <ng-template matStepLabel>Done!</ng-template>
+        <p>
+          You have completed the process of adding a bicycle. <br />
+          Are you sure you want to create it?
+        </p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset(); onSubmit()">
+            Create
+          </button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </div>
+</div>

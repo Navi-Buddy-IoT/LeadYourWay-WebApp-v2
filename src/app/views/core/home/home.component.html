@@ -55,12 +55,17 @@
 <div>
   <div class="row">
     <div class="col-md-3" *ngFor="let bicycle of bicycles">
-      <!-- <app-card-bicyle [bicycle]="bicycle"></app-card-bicyle> -->
-      bici works!
+      <app-card-bicycle [bicycle]="bicycle"></app-card-bicycle>
     </div>
   </div>
 </div>
 
 <div class="container">
-  <!-- <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page"> </mat-paginator> -->
+  <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
 </div>

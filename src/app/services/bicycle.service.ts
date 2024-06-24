@@ -3,21 +3,24 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { throwError, Observable, retry, catchError } from 'rxjs';
 import { environment } from '../env/environment';
 import { Bicycle } from '../models/bicycle.model';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BicycleService {
+  cookieService = inject(CookieService);
+
   private base_Url = environment.baseUrl + 'bicycles';
 
   constructor(private http: HttpClient) {}
 
   private getHttpOptions(): { headers: HttpHeaders } {
-    const token = localStorage.getItem('token');
+    const token = this.cookieService.get('JSESSIONID');
     const headers = new HttpHeaders({
       'Content-type': 'application/json',
       Authorization: `Bearer ${token}`,

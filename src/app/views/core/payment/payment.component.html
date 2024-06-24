@@ -1,1 +1,111 @@
-<p>payment works!</p>
+<app-header />
+<div class="container">
+  <form #PaymentForm="ngForm" (ngSubmit)="onSubmit(PaymentForm)">
+    <div class="row">
+      <h1 class="title">Payment Method</h1>
+      <div class="col">
+        <div class="inputBox">
+          <span for="nombre">Full name :</span>
+          <input
+            matInput
+            type="text"
+            id="nombre"
+            placeholder="Example Name"
+            required
+            name="nombre"
+          />
+        </div>
+
+        <div class="inputBox">
+          <span for="card">Cards we accept :</span>
+          <mat-radio-group
+            aria-label="Select an option"
+            [ngModelOptions]="{ standalone: true }"
+            [(ngModel)]="PaymentData.cardType"
+          >
+            <mat-radio-button value="Visa">Visa</mat-radio-button>
+            <mat-radio-button value="Mastercard">Mastercard</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="inputBox">
+          <span for="numero_tarjeta">Card number :</span>
+          <input
+            matInput
+            type="text"
+            id="numero_tarjeta"
+            placeholder="1111-2222-3333-4444"
+            [ngModelOptions]="{ standalone: true }"
+            required
+            [(ngModel)]="PaymentData.cardNumber"
+          />
+        </div>
+        <div class="inputBox">
+          <span for="nombre_tarjeta">Card name :</span>
+          <input
+            matInput
+            type="text"
+            id="nombre_tarjeta"
+            placeholder="Example card name"
+            [ngModelOptions]="{ standalone: true }"
+            required
+            [(ngModel)]="PaymentData.cardHolder"
+          />
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="inputBox">
+          <span for="email">Email :</span>
+          <input
+            matInput
+            type="email"
+            id="correo"
+            placeholder="example@example.com"
+            required
+          />
+        </div>
+        <div class="flex">
+          <div class="inputBox">
+            <span for="año_exp">Expiration year :</span>
+            <input
+              matInput
+              type="text"
+              id="año_exp"
+              placeholder="2022"
+              [ngModelOptions]="{ standalone: true }"
+              required
+              [(ngModel)]="year"
+            />
+          </div>
+          <div class="inputBox">
+            <span for="mes_exp">Expiration month :</span>
+            <input
+              matInput
+              type="text"
+              id="mes_exp"
+              placeholder="05"
+              [ngModelOptions]="{ standalone: true }"
+              required
+              [(ngModel)]="month"
+            />
+          </div>
+        </div>
+        <div class="inputBox" style="margin-top: 0">
+          <span for="cvv">CVV :</span>
+          <input
+            matInput
+            type="text"
+            id="cvv"
+            placeholder="1234"
+            [ngModelOptions]="{ standalone: true }"
+            required
+            [(ngModel)]="PaymentData.cardCvv"
+          />
+        </div>
+      </div>
+    </div>
+    <button mat-button type="submit" class="submit-btn btn-primary">
+      Add card
+    </button>
+  </form>
+</div>

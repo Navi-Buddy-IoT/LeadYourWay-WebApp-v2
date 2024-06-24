@@ -5,6 +5,9 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +26,8 @@ export const appConfig: ApplicationConfig = {
       })
     ),
     provideAuth(() => getAuth()),
+    provideAnimations(),
+    provideAnimationsAsync(),
+    provideNativeDateAdapter(),
   ],
 };
