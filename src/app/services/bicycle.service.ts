@@ -46,7 +46,7 @@ export class BicycleService {
   getList(): Observable<any> {
     const httpOptions = this.getHttpOptions();
     return this.http
-      .get(`${this.base_Url}`)
+      .get(`${this.base_Url}`, httpOptions)
       .pipe(retry(3), catchError(this.handleError));
   }
 
@@ -82,7 +82,8 @@ export class BicycleService {
     const httpOptions = this.getHttpOptions();
     return this.http
       .get(
-        `${this.base_Url}/available?start_date=${startDate}&end_date=${endDate}`
+        `${this.base_Url}/available?start_date=${startDate}&end_date=${endDate}`,
+        httpOptions
       )
       .pipe(retry(3), catchError(this.handleError));
   }

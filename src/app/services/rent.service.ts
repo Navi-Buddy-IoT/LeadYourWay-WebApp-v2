@@ -50,6 +50,13 @@ export class RentService {
       .pipe(retry(3), catchError(this.handleError));
   }
 
+  getRentedBicycles(userId: string): Observable<any> {
+    const httpOptions = this.getHttpOptions();
+    return this.http
+      .get(`${this.base_Url}/user/${userId}`, httpOptions)
+      .pipe(retry(3), catchError(this.handleError));
+  }
+
   private getHttpOptions(): { headers: HttpHeaders } {
     const token = this.cookieService.get('JSESSIONID');
     const headers = new HttpHeaders({
