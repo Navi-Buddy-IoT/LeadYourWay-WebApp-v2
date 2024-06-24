@@ -11,17 +11,55 @@
             alt="{{ bicycle.bicycleDescription }}"
           />
         </div>
-        <div class="card-body containerBox vertical-center">
-          <p class="card-text"><b>Descripción de la bicicleta:</b></p>
-          <p class="card-text">{{ bicycle.bicycleDescription }}</p>
-          <p class="card-text"><b>Precio por hora de la bicicleta:</b></p>
-          <p class="card-text">S/.{{ bicycle.bicyclePrice }} por dia</p>
-          <p class="card-text">
-            <b>Costo aproximado según las fechas seleccionadas:</b>
-          </p>
-          <p class="card-text">S/.{{ this.getTotalCost() }}</p>
-          <button class="btn btn-primary" (click)="onReserve()">Rentar</button>
+        <div class="card-body containerBox vertical-center row">
+          <div class="col-md-6">
+            <p class="card-text"><b>Bike description:</b></p>
+            <p class="card-text">{{ bicycle.bicycleDescription }}</p>
+            <p class="card-text"><b>Price per day:</b></p>
+            <p class="card-text">S/.{{ bicycle.bicyclePrice }} per day</p>
+            <p class="card-text">
+              <b>Cost based on the selected dates:</b>
+            </p>
+            <p class="card-text">S/.{{ this.getTotalCost() }}</p>
+            <button class="btn btn-primary" (click)="onReserve()">Rent</button>
+          </div>
+          <div class="col-md-6">
+            <p class="card-text"><b>Bike model:</b></p>
+            <p class="card-text">
+              {{
+                bicycle.bicycleModel
+                  ? bicycle.bicycleModel
+                  : "No model registered"
+              }}
+            </p>
+            <p class="card-text"><b>Bike Size:</b></p>
+            <p class="card-text">{{ bicycle.bicycleSize }}</p>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-md">
+    <div class="card col-md-12">
+      <div class="col-md-12 text-center m-3">
+        <h1>This is <strong>LIVE</strong> data from the bicycle</h1>
+        <p>
+          Thanks to the IoT sensors installed on the bicycle,<br />
+          we can provide you with real-time data.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-6 center-map">
+          <app-google-map [bicycle]="bicycle" [isRented]="false" />
+        </div>
+        <div class="col-md-6 center-iot">
+          <app-temperature [bicycle]="bicycle" />
+          <hr />
+          <app-velocity [bicycle]="bicycle" />
+        </div>
+      </div>
+      <div class="col-md-12 text-center m-3">
+        <p>Retrieving latest data in... {{ countdown }}</p>
       </div>
     </div>
   </div>
